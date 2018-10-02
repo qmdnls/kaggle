@@ -130,7 +130,7 @@ for dataset in data_cleaner:
 	dataset['FamilySize'] = dataset['SibSp'] + dataset['Parch'] + 1
 	# Set whether person is alone (no other family aboard)
 	dataset['IsAlone'] = 1 # Initialize to yes
-	dataset['IsAlone'].loc[dataset['Family size'] > 1] = 0 # If family size > 1 they are not alone
+	dataset['IsAlone'].loc[dataset['FamilySize'] > 1] = 0 # If family size > 1 they are not alone
 
 	# Create a varialbe for the title, split from name
 	dataset['Title'] = dataset['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
