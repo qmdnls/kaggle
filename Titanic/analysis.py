@@ -30,6 +30,9 @@ print("IPython version: {}". format(IPython.__version__))
 import sklearn #collection of machine learning algorithms
 print("scikit-learn version: {}". format(sklearn.__version__))
 
+import xgboost
+print("xgboost version: {}". format(xgboost.__version__))
+
 # Misc libraries
 import random
 import time
@@ -38,7 +41,7 @@ import time
 # Ignore warnings
 import warnings
 warnings.filterwarnings('ignore')
-print('-'*25)
+print('-'*30)
 
 
 # Input data files are available in the "input/" directory.
