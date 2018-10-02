@@ -155,6 +155,35 @@ print("\n")
 stat_min = 10 # common minimum sample size in statistics
 title_names = (data1['Title'].value_counts() < stat_min)
 data1['Title'] = data1['Title'].apply(lambda x: 'Misc' if title_names.loc[x] == True else x)
+
+# And finally print the final title counts
 print("Title value counts:\n")
 print(data1['Title'].value_counts())
 
+
+
+# Convert objects to category using Label Encoder for train and test/validation dataset
+label = LabelEncoder()
+for dataset in data_cleaner:
+	dataset['Sex_Code'] = label.fit_transform(dataset['Sex'])
+	dataset['Embarked_Code'] = label.fit_transform(dataset['Embarked'])
+	dataset['Title_Code'] = label.fit_transform(dataset['Title'])
+	dataset['AgeBin_Code'] = label.fit_transform(dataset['AgeBin'])
+	dataset['FareBin_Code'] = label.fit_transform(dataset['FareBin'])
+
+# Define the target variable
+target = ['Survived']
+
+# Define our feature variables
+data1_x = ['Sex', 'Pclass', 'Embarked', 'Title', 'SibSp', 'Parch', 'Age', 'Fare', 'FamilySize', 'IsAlone'] # Use these for charts (prettier)
+data1_x_calc = ['Sex_code', 'Pclass', 'Embarked_Code', 'Title_Code', 'SibSp', 'Parch', 'Age', 'Fare', 'FamilySize', 'IsAlone'] # For algorithmic calculation
+data1_xy = target + data1_x
+
+# Define our features w/ bins (removes continuous variables)
+data1_x_bin = ['Sex_Code','Pclass', 'Embarked_Code', 'Title_Code', 'FamilySize', 'AgeBin_Code', 'FareBin_Code']
+data1_xy_bin = Target + data1_x_bin
+
+# Define features and target variables for dummy features original
+data1_dummy = pd.get_dummies(data1[data1_x])
+data1_x_dummy = data1_dummy.columns.tolist()
+data1_xy_dummy = Target + data1_x_dummy
