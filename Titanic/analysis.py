@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Load important python libraries for data analysis
 import sys #access to system parameters https://docs.python.org/3/library/sys.html
 print("Python version: {}". format(sys.version))
