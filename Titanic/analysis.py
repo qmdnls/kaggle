@@ -113,3 +113,7 @@ for dataset in data_cleaner:
 
 	# Complete missing fare values with the median
 	dataset['Fare'].fillna(dataset['Fare'].median(), inplace = True)
+
+# Drop the incomplete cabin column, also exclude PassengerID and Ticket (random unique identifiers)
+drop_columns = ['Cabin', 'PassengerID', 'Ticket']
+data1.drop(drop_columns, axis=1, inplace = True)
