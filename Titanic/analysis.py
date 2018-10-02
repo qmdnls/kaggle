@@ -89,4 +89,9 @@ data_val = pd.read_csv('input/test.csv')
 # Let's create a copy of our data
 data1 = data_raw.copy(deep = True)
 
+# To clean our data
+data_cleaner = [data1, data_val]
 
+# Previewing our data
+print(data_raw.info())
+print(data_raw.sample(10))
