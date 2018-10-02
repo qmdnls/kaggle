@@ -147,3 +147,14 @@ print("\n")
 # Show count for titles (we might have to clean them up a bit)
 print("Title value counts:\n")
 print(data1['Title'].value_counts())
+
+# Let's clean up some of those rare title names
+print("\n")
+print("Cleaning up titles...")
+print("\n")
+stat_min = 10 # common minimum sample size in statistics
+title_names = (data1['Title'].value_counts() < stat_min)
+data1['Title'] = data1['Title'].apply(lambda x: 'Misc' if title_names.loc[x] == True else x)
+print("Title value counts:\n")
+print(data1['Title'].value_counts())
+
