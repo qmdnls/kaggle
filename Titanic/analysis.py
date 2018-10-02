@@ -68,8 +68,6 @@ import seaborn as sns
 from pandas.tools.plotting import scatter_matrix
 
 #Configure Visualization Defaults
-#%matplotlib inline = show plots in Jupyter Notebook browser
-%matplotlib inline
 mpl.style.use('ggplot')
 sns.set_style('white')
 pylab.rcParams['figure.figsize'] = 12,8
