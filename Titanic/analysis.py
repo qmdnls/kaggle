@@ -188,13 +188,10 @@ data1_dummy = pd.get_dummies(data1[data1_x])
 data1_x_dummy = data1_dummy.columns.tolist()
 data1_xy_dummy = target + data1_x_dummy
 
-print('Train columns with null values: \n', data1.isnull().sum())
-print("-"*10)
-print (data1.info())
+print('Train columns with null values:\n', data1.isnull().sum())
 print("-"*10)
 
-print('Test/Validation columns with null values: \n', data_val.isnull().sum())
-print("-"*10)
-print (data_val.info())
+print('Test/Validation columns with null values:\n', data_val.isnull().sum())
 print("-"*10)
 
+print(data_raw.describe(include = 'all'))
