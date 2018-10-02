@@ -3,6 +3,8 @@
 This is my solution for the [Kaggle competition](https://www.kaggle.com/c/titanic) by the same name.  
 This is my first solution for a Kaggle competition. It is however, heavily inspired by a community kernel that can be found [here](https://www.kaggle.com/ldfreeman3/a-data-science-framework-to-achieve-99-accuracy). I am working through this kernel to learn and apply some data science and machine learning concepts.
 
+The dataset for the competition can be found [here](https://www.kaggle.com/c/titanic/data). To run my solution place the dataset files in the input directory.
+
 ## Competition Description
 The sinking of the RMS Titanic is one of the most infamous shipwrecks in history.  On April 15, 1912, during her maiden voyage, the Titanic sank after colliding with an iceberg, killing 1502 out of 2224 passengers and crew. This sensational tragedy shocked the international community and led to better safety regulations for ships.
 
