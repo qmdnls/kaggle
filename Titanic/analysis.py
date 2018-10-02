@@ -93,5 +93,10 @@ data1 = data_raw.copy(deep = True)
 data_cleaner = [data1, data_val]
 
 # Previewing our data
-print(data_raw.info())
-print(data_raw.sample(10))
+print(data1.info())
+print("-"*20)
+print(data1.sample(10))
+print("-"*20)
+print('Train columns with null values:\n', data1.isnull().sum())
+print("-"*20)
+print('Validation columns with null values:\n', data_val.isnull().sum())
