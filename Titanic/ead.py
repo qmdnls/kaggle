@@ -105,12 +105,10 @@ for dataset in data_cleaner:
 	dataset['Fare'].fillna(dataset['Fare'].median(), inplace = True)
 
 # Drop the incomplete cabin column, also exclude PassengerId and Ticket (random unique identifiers)
-print("Exclude incomplete and random columns...")
 drop_columns = ['Cabin', 'PassengerId', 'Ticket']
 data1.drop(drop_columns, axis=1, inplace = True)
 
 # Feature engineering for our train and validations data sets
-print("Feature engineering...")
 for dataset in data_cleaner:
 	# Create a discrete variable for family size
 	dataset['FamilySize'] = dataset['SibSp'] + dataset['Parch'] + 1
@@ -147,7 +145,7 @@ target = ['Survived']
 
 # Define our feature variables
 data1_x = ['Sex', 'Pclass', 'Embarked', 'Title', 'SibSp', 'Parch', 'Age', 'Fare', 'FamilySize', 'IsAlone'] # Use these for charts (prettier)
-data1_x_calc = ['Sex_code', 'Pclass', 'Embarked_Code', 'Title_Code', 'SibSp', 'Parch', 'Age', 'Fare', 'FamilySize', 'IsAlone'] # For algorithmic calculation
+data1_x_calc = ['Sex_Code', 'Pclass', 'Embarked_Code', 'Title_Code', 'SibSp', 'Parch', 'Age', 'Fare', 'FamilySize', 'IsAlone'] # For algorithmic calculation
 data1_xy = target + data1_x
 
 # Define our features w/ bins (removes continuous variables)
@@ -163,7 +161,7 @@ data1_xy_dummy = target + data1_x_dummy
 # train_test_split defaults to splitting off .25 of the dataset as a test set
 train1_x, test1_x, train1_y, test1_y = model_selection.train_test_split(data1[data1_x_calc], data1[target], random_state = 0)
 train1_x_bin, test1_x_bin, train1_y_bin, test1_y_bin = model_selection.train_test_split(data1[data1_x_bin], data1[target], random_state = 0)
-train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.train_test_split(data1[data1_x_dummy], data1[target], random_state = 0)
+train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.train_test_split(data1_dummy[data1_x_dummy], data1[target], random_state = 0)
 
 
 
