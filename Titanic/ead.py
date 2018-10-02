@@ -171,3 +171,62 @@ for x in data1_x:
 		print('-'*30, '\n')
 
 print(pd.crosstab(data1['Title'],data1[target[0]]))
+
+# Let's plot some stuff
+# Graph quantitative features
+plt.figure(figsize=[16,12])
+
+plt.subplot(231)
+plt.boxplot(x=data1['Fare'], showmeans = True, meanline = True)
+plt.title('Fare Boxplot')
+plt.ylabel('Fare ($)')
+
+plt.subplot(232)
+plt.boxplot(data1['Age'], showmeans = True, meanline = True)
+plt.title('Age Boxplot')
+plt.ylabel('Age (Years)')
+
+plt.subplot(233)
+plt.boxplot(data1['FamilySize'], showmeans = True, meanline = True)
+plt.title('Family Size Boxplot')
+plt.ylabel('Family Size (#)')
+
+plt.subplot(234)
+plt.hist(x = [data1[data1['Survived']==1]['Fare'], data1[data1['Survived']==0]['Fare']], 
+         stacked=True, color = ['b','r'],label = ['Survived','Dead'])
+plt.title('Fare Histogram by Survival')
+plt.xlabel('Fare ($)')
+plt.ylabel('# of Passengers')
+plt.legend()
+
+plt.subplot(235)
+plt.hist(x = [data1[data1['Survived']==1]['Age'], data1[data1['Survived']==0]['Age']], 
+         stacked=True, color = ['b','r'],label = ['Survived','Dead'])
+plt.title('Age Histogram by Survival')
+plt.xlabel('Age (Years)')
+plt.ylabel('# of Passengers')
+plt.legend()
+
+plt.subplot(236)
+plt.hist(x = [data1[data1['Survived']==1]['FamilySize'], data1[data1['Survived']==0]['FamilySize']], 
+         stacked=True, color = ['b','r'],label = ['Survived','Dead'])
+plt.title('Family Size Histogram by Survival')
+plt.xlabel('Family Size (#)')
+plt.ylabel('# of Passengers')
+plt.legend()
+
+#Graph individual features by survival
+fig, saxis = plt.subplots(2, 3,figsize=(16,12))
+
+sns.barplot(x = 'Embarked', y = 'Survived', data=data1, ax = saxis[0,0])
+sns.barplot(x = 'Pclass', y = 'Survived', order=[1,2,3], data=data1, ax = saxis[0,1])
+sns.barplot(x = 'IsAlone', y = 'Survived', order=[1,0], data=data1, ax = saxis[0,2])
+
+sns.pointplot(x = 'FareBin', y = 'Survived',  data=data1, ax = saxis[1,0])
+sns.pointplot(x = 'AgeBin', y = 'Survived',  data=data1, ax = saxis[1,1])
+sns.pointplot(x = 'FamilySize', y = 'Survived', data=data1, ax = saxis[1,2])
+
+# Show plot
+plt.show()
+
+
