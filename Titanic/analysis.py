@@ -139,7 +139,7 @@ for dataset in data_cleaner:
 	# Create fare bins using qcut for frequency bins
 	dataset['FareBin'] = pd.qcut(dataset['Fare'], 4)
 	# Create age bins using cut for value bins
-	dataset['Age'] = pd.cut(dataset['Age'].astype('int'), 4)
+	dataset['AgeBin'] = pd.cut(dataset['Age'].astype('int'), 4)
 
 print("Done")
 print("\n")
@@ -187,3 +187,14 @@ data1_xy_bin = Target + data1_x_bin
 data1_dummy = pd.get_dummies(data1[data1_x])
 data1_x_dummy = data1_dummy.columns.tolist()
 data1_xy_dummy = Target + data1_x_dummy
+
+print('Train columns with null values: \n', data1.isnull().sum())
+print("-"*10)
+print (data1.info())
+print("-"*10)
+
+print('Test/Validation columns with null values: \n', data_val.isnull().sum())
+print("-"*10)
+print (data_val.info())
+print("-"*10)
+
