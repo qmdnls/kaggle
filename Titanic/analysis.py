@@ -127,7 +127,7 @@ data1.drop(drop_columns, axis=1, inplace = True)
 print("Feature engineering...")
 for dataset in data_cleaner:
 	# Create a discrete variable for family size
-	dataset['Family size'] = dataset['SibSp'] + dataset['Parch'] + 1
+	dataset['FamilySize'] = dataset['SibSp'] + dataset['Parch'] + 1
 	# Set whether person is alone (no other family aboard)
 	dataset['IsAlone'] = 1 # Initialize to yes
 	dataset['IsAlone'].loc[dataset['Family size'] > 1] = 0 # If family size > 1 they are not alone
