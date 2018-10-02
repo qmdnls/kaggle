@@ -181,12 +181,12 @@ data1_xy = target + data1_x
 
 # Define our features w/ bins (removes continuous variables)
 data1_x_bin = ['Sex_Code','Pclass', 'Embarked_Code', 'Title_Code', 'FamilySize', 'AgeBin_Code', 'FareBin_Code']
-data1_xy_bin = Target + data1_x_bin
+data1_xy_bin = target + data1_x_bin
 
 # Define features and target variables for dummy features original
 data1_dummy = pd.get_dummies(data1[data1_x])
 data1_x_dummy = data1_dummy.columns.tolist()
-data1_xy_dummy = Target + data1_x_dummy
+data1_xy_dummy = target + data1_x_dummy
 
 print('Train columns with null values: \n', data1.isnull().sum())
 print("-"*10)
