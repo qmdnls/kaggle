@@ -93,17 +93,21 @@ data1 = data_raw.copy(deep = True)
 data_cleaner = [data1, data_val]
 
 # Previewing our data
+print("Data preview: \n")
 print(data1.info())
 print("-"*20)
+print("Sample data:")
 print(data1.sample(10))
 print("-"*20)
 print('Train columns with null values:\n', data1.isnull().sum())
 print("-"*20)
 print('Validation columns with null values:\n', data_val.isnull().sum())
 print("-"*20)
+print("Data description:")
 print(data1.describe(include = 'all'))
 
 # Now let's clean both our datasets (train and validation) at once
+print("\nCleaning data...")
 for dataset in data_cleaner:
 	# Complete missing age values with the median
 	dataset['Age'].fillna(dataset['Age'].median(), inplace = True)
@@ -114,6 +118,22 @@ for dataset in data_cleaner:
 	# Complete missing fare values with the median
 	dataset['Fare'].fillna(dataset['Fare'].median(), inplace = True)
 
-# Drop the incomplete cabin column, also exclude PassengerID and Ticket (random unique identifiers)
-drop_columns = ['Cabin', 'PassengerID', 'Ticket']
+# Drop the incomplete cabin column, also exclude PassengerId and Ticket (random unique identifiers)
+print("Exclude incomplete and random columns...")
+drop_columns = ['Cabin', 'PassengerId', 'Ticket']
 data1.drop(drop_columns, axis=1, inplace = True)
+
+# Feature engineering for our train and validations data sets
+print("Feature engineering...")
+for dataset in data_cleaner:
+	# Create a discrete variable for family size
+	dataset['Family size'] = dataset['SibSp'] + dataset['Parch'] + 1
+	# Set whether person is alone (no other family aboard)
+	dataset['IsAlone'] = 1 # Initialize to yes
+	dataset['IsAlone'].loc[dataset['Family size'] > 1] = 0 # If family size > 1 they are not alone
+
+	# Create a varialbe for the title, split from name
+	dataset['Title'] = dataset['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
+
+
+
