@@ -141,4 +141,9 @@ for dataset in data_cleaner:
 	# Create age bins using cut for value bins
 	dataset['Age'] = pd.cut(dataset['Age'].astype('int'), 4)
 
+print("Done")
+print("\n")
 
+# Show count for titles (we might have to clean them up a bit)
+print("Title value counts:\n")
+print(data1['Title'].value_counts())
