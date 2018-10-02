@@ -215,7 +215,7 @@ plt.xlabel('Family Size (#)')
 plt.ylabel('# of Passengers')
 plt.legend()
 
-#Graph individual features by survival
+# Graph individual features by survival
 fig, saxis = plt.subplots(2, 3,figsize=(16,12))
 
 sns.barplot(x = 'Embarked', y = 'Survived', data=data1, ax = saxis[0,0])
@@ -226,7 +226,25 @@ sns.pointplot(x = 'FareBin', y = 'Survived',  data=data1, ax = saxis[1,0])
 sns.pointplot(x = 'AgeBin', y = 'Survived',  data=data1, ax = saxis[1,1])
 sns.pointplot(x = 'FamilySize', y = 'Survived', data=data1, ax = saxis[1,2])
 
+# Ca heatmap of dataset
+def correlation_heatmap(df):
+    _ , ax = plt.subplots(figsize =(14, 12))
+    colormap = sns.diverging_palette(220, 10, as_cmap = True)
+    
+    _ = sns.heatmap(
+        df.corr(), 
+        cmap = colormap,
+        square=True, 
+        cbar_kws={'shrink':.9 }, 
+        ax=ax,
+        annot=True, 
+        linewidths=0.1,vmax=1.0, linecolor='white',
+        annot_kws={'fontsize':12 }
+    )
+    
+    plt.title('Pearson Correlation of Features', y=1.05, size=15)
+
+correlation_heatmap(data1)
+
 # Show plot
 plt.show()
-
-
