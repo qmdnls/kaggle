@@ -102,3 +102,14 @@ print("-"*20)
 print('Validation columns with null values:\n', data_val.isnull().sum())
 print("-"*20)
 print(data1.describe(include = 'all'))
+
+# Now let's clean both our datasets (train and validation) at once
+for dataset in data_cleaner:
+	# Complete missing age values with the median
+	dataset['Age'].fillna(dataset['Age'].median(), inplace = True)
+
+	# Complete missing embarked values with the mode
+	dataset['Embarked'].fillna(dataset['Embarked'].mode()[0], inplace = True)
+
+	# Complete missing fare values with the median
+	dataset['Fare'].fillna(dataset['Fare'].median(), inplace = True)
