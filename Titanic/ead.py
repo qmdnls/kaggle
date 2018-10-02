@@ -93,7 +93,7 @@ data1 = data_raw.copy(deep = True)
 data_cleaner = [data1, data_val]
 
 # Now let's clean both our datasets (train and validation) at once
-print("Cleaning data...")
+print("Cleaning data...\n")
 for dataset in data_cleaner:
 	# Complete missing age values with the median
 	dataset['Age'].fillna(dataset['Age'].median(), inplace = True)
@@ -163,8 +163,11 @@ train1_x, test1_x, train1_y, test1_y = model_selection.train_test_split(data1[da
 train1_x_bin, test1_x_bin, train1_y_bin, test1_y_bin = model_selection.train_test_split(data1[data1_x_bin], data1[target], random_state = 0)
 train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.train_test_split(data1_dummy[data1_x_dummy], data1[target], random_state = 0)
 
+# Print correlation of variables with survival
+for x in data1_x:
+	if data1[x].dtype != 'float64':
+		print('Survival Correlation by:', x)
+		print(data1[[x, target[0]]].groupby(x, as_index=False).mean())
+		print('-'*30, '\n')
 
-
-
-
-
+print(pd.crosstab(data1['Title'],data1[target[0]]))
