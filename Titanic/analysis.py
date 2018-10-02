@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
 
+# Solution based on the following kernel:
+# https://www.kaggle.com/ldfreeman3/a-data-science-framework-to-achieve-99-accuracy
+
+# We will use scikit-learn to develop our machine learning algorithms
+# For data visualization we will use seaborn and matplotlib
+
+
 # Load important python libraries for data analysis
 import sys #access to system parameters https://docs.python.org/3/library/sys.html
 print("Python version: {}". format(sys.version))
@@ -41,3 +48,30 @@ from subprocess import check_output
 print(check_output(["ls", "input"]).decode("utf8"))
 
 # Any results you write to the current directory are saved as output.
+
+
+# Importing common modeling algorithms from scikit-learn and xgboost
+from sklearn import svm, tree, linear_model, neighbors, naive_bayes, ensemble, discriminant_analysis, gaussian_process
+from xgboost import XGBClassifier
+
+# Importing common model helpers
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+from sklearn import feature_selection
+from sklearn import model_selection
+from sklearn import metrics
+
+# Visualization using matplotlib and seaborn
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.pylab as pylab
+import seaborn as sns
+from pandas.tools.plotting import scatter_matrix
+
+#Configure Visualization Defaults
+#%matplotlib inline = show plots in Jupyter Notebook browser
+%matplotlib inline
+mpl.style.use('ggplot')
+sns.set_style('white')
+pylab.rcParams['figure.figsize'] = 12,8
+
+
