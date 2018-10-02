@@ -70,9 +70,23 @@ import matplotlib.pylab as pylab
 import seaborn as sns
 from pandas.tools.plotting import scatter_matrix
 
-#Configure Visualization Defaults
+# Configure some visualization defaults
 mpl.style.use('ggplot')
 sns.set_style('white')
 pylab.rcParams['figure.figsize'] = 12,8
+
+
+# The dataset is split into training data, test data and validation data
+# A training data file has  been provided in the competition which we will split into training and test data later
+# Furthermore a file for final validaton (test.csv) has been provided which will be used for final submission in the competition
+
+# Import the training data
+data_raw = pd.read_csv('input/train.csv')
+
+# Import the validation data
+data_val = pd.read_csv('input/test.csv')
+
+# Let's create a copy of our data
+data1 = data_raw.copy(deep = True)
 
 
