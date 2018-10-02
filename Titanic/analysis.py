@@ -135,5 +135,10 @@ for dataset in data_cleaner:
 	# Create a varialbe for the title, split from name
 	dataset['Title'] = dataset['Name'].str.split(", ", expand=True)[1].str.split(".", expand=True)[0]
 
+	# Keep in mind qcut vs cut
+	# Create fare bins using qcut for frequency bins
+	dataset['FareBin'] = pd.qcut(dataset['Fare'], 4)
+	# Create age bins using cut for value bins
+	dataset['Age'] = pd.cut(dataset['Age'].astype('int'), 4)
 
 
