@@ -58,7 +58,7 @@ from sklearn import svm, tree, linear_model, neighbors, naive_bayes, ensemble, d
 from xgboost import XGBClassifier
 
 # This is what we are going to use
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 
 # Importing common model helpers
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
@@ -169,7 +169,7 @@ train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.t
 print("Learning...")
 
 # Apply Random Forest
-m = RandomForestRegressor(n_jobs=-1)
+m = RandomForestClassifier(n_jobs=-1)
 m.fit(data1[data1_x_bin], data1[target])
 print(m.score(train1_x_bin[data1_x_bin], train1_y_bin[target]))
 print(m.score(test1_x_bin[data1_x_bin], test1_y_bin[target]))
