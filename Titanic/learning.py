@@ -168,12 +168,31 @@ train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.t
 
 print("Learning...")
 
-# Apply Random Forest
-m = RandomForestClassifier(n_jobs=-1)
+# Apply xgb classifier
+m = XGBClassifier(n_jobs=-1)
+
+# Hyperparameter tuning
+grid_n_estimator = [10, 50, 100, 300]
+grid_ratio = [.1, .25, .5, .75, 1.0]
+grid_learn = [.01, .03, .05, .1, .25]
+grid_max_depth = [2, 4, 6, 8, 10, None]
+grid_min_samples = [5, 10, .03, .05, .10]
+grid_criterion = ['gini', 'entropy']
+grid_bool = [True, False]
+grid_seed = [0]
+cv_split = model_selection.ShuffleSplit(n_splits = 10, test_size = .3, train_size = .6, random_state = 0 )
+
+m = model_selection.GridSearchCV(XGBClassifier(), param_grid= {'learning_rate': grid_learn, 'max_depth': [0,2,4,6,8,10], 'n_estimators': grid_n_estimator, 'seed': grid_seed}, scoring = 'roc_auc', cv = cv_split)
+
 m.fit(data1[data1_x_bin], data1[target])
+
 print(m.score(train1_x_bin[data1_x_bin], train1_y_bin[target]))
 print(m.score(test1_x_bin[data1_x_bin], test1_y_bin[target]))
 
 
 # Predict using model created above
 data_val['Survived'] = m.predict(data_val[data1_x_bin])
+
+# Write predictions to file to submit to Kaggle
+submit = data_val[['PassengerId','Survived']]
+submit.to_csv("submit.csv", index=False)
