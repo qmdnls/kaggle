@@ -57,6 +57,9 @@ print(check_output(["ls", "input"]).decode("utf8"))
 from sklearn import svm, tree, linear_model, neighbors, naive_bayes, ensemble, discriminant_analysis, gaussian_process
 from xgboost import XGBClassifier
 
+# This is what we are going to use
+from sklearn.ensemble import RandomForestRegressor
+
 # Importing common model helpers
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn import feature_selection
@@ -93,7 +96,7 @@ data1 = data_raw.copy(deep = True)
 data_cleaner = [data1, data_val]
 
 # Now let's clean both our datasets (train and validation) at once
-print("Cleaning data...\n")
+print("Cleaning data...")
 for dataset in data_cleaner:
 	# Complete missing age values with the median
 	dataset['Age'].fillna(dataset['Age'].median(), inplace = True)
@@ -163,4 +166,14 @@ train1_x, test1_x, train1_y, test1_y = model_selection.train_test_split(data1[da
 train1_x_bin, test1_x_bin, train1_y_bin, test1_y_bin = model_selection.train_test_split(data1[data1_x_bin], data1[target], random_state = 0)
 train1_x_dummy, test1_x_dummy, train1_y_dummy, test1_y_dummy = model_selection.train_test_split(data1_dummy[data1_x_dummy], data1[target], random_state = 0)
 
+print("Learning...")
 
+# Apply Random Forest
+m = RandomForestRegressor(n_jobs=-1)
+m.fit(data1[data1_x_bin], data1[target])
+print(m.score(train1_x_bin[data1_x_bin], train1_y_bin[target]))
+print(m.score(test1_x_bin[data1_x_bin], test1_y_bin[target]))
+
+
+# Predict using model created above
+data_val['Survived'] = m.predict(data_val[data1_x_bin])
