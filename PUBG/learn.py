@@ -12,11 +12,13 @@ from os import makedirs
 # Define path of our dataset
 PATH = "data/"
 df_raw = pd.read_csv(f'{PATH}train.csv')
+#os.makedirs('tmp', exist_ok=True)
+#df_raw.to_feather('tmp/pubg-raw')
+#df_raw = pd.read_feather('tmp/pubg-raw')
 
 # Split dataset
 print("Splitting dataset...")
-os.makedirs('tmp', exist_ok=True)
-df_raw.to_feather('tmp/pubg-raw')
+
 
 # Train model
 print("Training...")
